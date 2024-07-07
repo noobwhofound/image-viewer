@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 import os
 
 
-def resizeImage(width, height):
+def resizeImage(width : int, height : int) -> tuple(int, int):
     maxWidth = 1140
     maxHeight = 500
 
@@ -18,12 +18,12 @@ def resizeImage(width, height):
     
     return newWidth, newHeight
 
-def saveImage(file_path):
+def saveImage(file_path : str) -> None:
     global current_img, current_format
     print("saving")
     current_img.save(file_path, current_format.upper())
 
-def imageDisplayer(file_path, isOtherPic):
+def imageDisplayer(file_path : str, isOtherPic : bool) -> None:
         global app, label, current, dir_files, rotate, current_img, current_format
 
         if isOtherPic == True and (current_img != None) and (rotate % 360 != 0):
@@ -48,7 +48,7 @@ def imageDisplayer(file_path, isOtherPic):
         label.image = pic
         label.pack()
 
-def imageUploader():
+def imageUploader() -> None:
     global dir_files
 
     fileTypes = [("Image files", "*.png;*.jpg;*.jpeg")]
@@ -61,7 +61,7 @@ def imageUploader():
     else:
         print("No file is chosen !! Please choose a file.")
 
-def goLeft(event):
+def goLeft(event) -> None:
     global dir_files, current
     if current != None:
         if current - 1 >= 0:
@@ -69,7 +69,7 @@ def goLeft(event):
         else :
             imageDisplayer(dir_files[-1], True)
 
-def goRight(event):
+def goRight(event) -> None:
     global dir_files, current
     if current != None:
         if current + 1 <= len(dir_files) - 1:
@@ -77,13 +77,13 @@ def goRight(event):
         else :
             imageDisplayer(dir_files[0], True)
 
-def rotateRight(event):
+def rotateRight(event) -> None:
     global dir_files, current, rotate
     if current != None:
         rotate += 90
         imageDisplayer(dir_files[current], False)
 
-def rotateLeft(event):
+def rotateLeft(event) -> None:
     global dir_files, current, rotate
     if current != None:
         rotate -= 90
